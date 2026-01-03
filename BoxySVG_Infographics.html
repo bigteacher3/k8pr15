@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Майстерність у BoxySVG: Інфографіка</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Slate 50 */
+            color: #1e293b; /* Slate 800 */
+        }
+
+        /* Palette: Vibrant Creativity */
+        /* Primary: #6366f1 (Indigo 500) */
+        /* Secondary: #ec4899 (Pink 500) */
+        /* Accent: #f59e0b (Amber 500) */
+
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 1rem; /* rounded-2xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Chart Container Styling - Mandatory Requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px; /* Default height */
+            max-height: 400px;
+        }
+
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+
+        /* CSS Shapes for Boolean Ops (NO SVG) */
+        .shape-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            position: absolute;
+            mix-blend-mode: multiply;
+        }
+        .bool-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            border-left: 5px solid #6366f1;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+    <!-- 
+        NO SVG USED.
+        NO MERMAID JS USED.
+        Palette: Vibrant Creativity (Indigo/Pink/Amber)
+        Plan: Intro -> Tools Analysis -> Color Theory -> Boolean Logic -> Shortcuts Data -> Tips
+    -->
+</head>
+<body class="antialiased">
+
+    <!-- Hero Section -->
+    <header class="w-full bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-slate-800 tracking-tight">BoxySVG <span class="text-indigo-500">Masterclass</span></h1>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-500">
+                <a href="#tools" class="hover:text-indigo-600 transition">Інструменти</a>
+                <a href="#logic" class="hover:text-indigo-600 transition">Логіка</a>
+                <a href="#shortcuts" class="hover:text-indigo-600 transition">Гарячі клавіші</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+        <!-- Intro -->
+        <section class="text-center max-w-3xl mx-auto">
+            <h2 class="text-4xl md:text-6xl font-extrabold mb-6 gradient-text py-2">Відродження Векторних Навичок</h2>
+            <p class="text-lg md:text-xl text-slate-600 leading-relaxed">
+                Вітаю, юні дизайнери! Настав час згадати математичну магію BoxySVG. На відміну від пікселів, вектори дозволяють нам масштабувати ідеї до розміру хмарочосів без втрати якості. Давайте освіжимо ваші знання за допомогою цієї інтерактивної інфографіки.
+            </p>
+        </section>
+
+        <!-- Section 1: The Big Four Tools -->
+        <section id="tools">
+            <div class="section-header">
+                <h3 class="text-3xl font-bold text-slate-800">1. Велика Четвірка Інструментів</h3>
+                <p class="text-slate-500 mt-1">Аналіз функціональності основних інструментів редактора</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <!-- Text Content -->
+                <div class="space-y-6">
+                    <p class="text-slate-600 mb-4">
+                        У BoxySVG є чотири стовпи, на яких тримається весь дизайн. Розуміння їхньої спеціалізації — ключ до швидкості.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="card p-5 border-l-4 border-indigo-500">
+                            <h4 class="font-bold text-lg mb-1">Transform (V)</h4>
+                            <p class="text-sm text-slate-600">Ваша "рука". Виділення, рух, розмір. <br><span class="text-xs font-semibold text-indigo-500">Порада: Shift тримає пропорції.</span></p>
+                        </div>
+                        <div class="card p-5 border-l-4 border-pink-500">
+                            <h4 class="font-bold text-lg mb-1">Shape Tools</h4>
+                            <p class="text-sm text-slate-600">Геометрична база: квадрати, кола, зірки. <br><span class="text-xs font-semibold text-pink-500">Секрет: Налаштування променів зірки.</span></p>
+                        </div>
+                        <div class="card p-5 border-l-4 border-amber-500">
+                            <h4 class="font-bold text-lg mb-1">Path Tool (P)</h4>
+                            <p class="text-sm text-slate-600">Створення складних довільних форм "точка за точкою".</p>
+                        </div>
+                        <div class="card p-5 border-l-4 border-emerald-500">
+                            <h4 class="font-bold text-lg mb-1">Edit Tool (E)</h4>
+                            <p class="text-sm text-slate-600">Маніпуляція вузлами (Nodes). Справжня магія редагування.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visualization: Radar Chart -->
+                <div class="card p-6 flex flex-col justify-center items-center bg-slate-900 text-white">
+                    <h4 class="text-center font-semibold mb-4 text-slate-200">Профіль Ефективності Інструментів</h4>
+                    <div class="chart-container">
+                        <canvas id="toolsRadarChart"></canvas>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-4 text-center">Діаграма порівнює частоту використання, складність опанування та творчий потенціал кожного інструменту.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Color & Style -->
+        <section class="bg-indigo-50 rounded-3xl p-8 md:p-12">
+            <div class="text-center mb-10">
+                <h3 class="text-3xl font-bold text-slate-800">2. Робота з Кольором</h3>
+                <p class="text-slate-600 max-w-2xl mx-auto mt-2">
+                    Плоскі кольори — це добре, але градієнти та прозорість додають професійного об'єму.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <!-- Card 1: Fill -->
+                <div class="card p-6">
+                    <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-tr from-blue-400 to-purple-600 mb-4 shadow-lg"></div>
+                    <h4 class="font-bold text-xl mb-2">Fill (Заливка)</h4>
+                    <p class="text-sm text-slate-600">Експериментуйте з градієнтами (Linear/Radial) замість суцільного кольору.</p>
+                </div>
+                <!-- Card 2: Stroke -->
+                <div class="card p-6">
+                    <div class="w-16 h-16 mx-auto rounded-full border-4 border-dashed border-pink-500 mb-4 flex items-center justify-center">
+                        <span class="text-2xl">⚡</span>
+                    </div>
+                    <h4 class="font-bold text-xl mb-2">Stroke (Контур)</h4>
+                    <p class="text-sm text-slate-600">Налаштуйте товщину та стиль лінії (пунктир, крапки) для акценту.</p>
+                </div>
+                <!-- Card 3: Opacity -->
+                <div class="card p-6">
+                    <div class="w-16 h-16 mx-auto relative mb-4">
+                        <div class="absolute inset-0 bg-red-500 rounded-full opacity-50 left-2"></div>
+                        <div class="absolute inset-0 bg-blue-500 rounded-full opacity-50 right-2"></div>
+                    </div>
+                    <h4 class="font-bold text-xl mb-2">Opacity (Прозорість)</h4>
+                    <p class="text-sm text-slate-600">Створюйте ефекти скла, тіні та накладання шарів.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Boolean Operations -->
+        <section id="logic">
+            <div class="section-header">
+                <h3 class="text-3xl font-bold text-slate-800">3. Геометрична Логіка</h3>
+                <p class="text-slate-500 mt-1">Boolean Operations: Як створювати складне з простого</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Unite -->
+                <div class="card p-6 flex flex-col items-center">
+                    <div class="bool-container mb-4">
+                        <div class="shape-circle bg-indigo-500" style="left: 10px; top: 20px;"></div>
+                        <div class="shape-circle bg-indigo-500" style="left: 30px; top: 20px;"></div>
+                    </div>
+                    <h4 class="font-bold text-lg">Unite (Об'єднання)</h4>
+                    <p class="text-sm text-center text-slate-600 mt-2">1 + 1 = 1. Зливає дві фігури в одну нову форму.</p>
+                </div>
+
+                <!-- Subtract -->
+                <div class="card p-6 flex flex-col items-center border-2 border-indigo-100">
+                    <div class="bool-container mb-4">
+                        <div class="shape-circle bg-pink-500" style="left: 10px; top: 20px;"></div>
+                        <div class="shape-circle bg-white border-2 border-dashed border-slate-300" style="left: 35px; top: 20px; mix-blend-mode: normal;"></div>
+                    </div>
+                    <h4 class="font-bold text-lg">Subtract (Віднімання)</h4>
+                    <p class="text-sm text-center text-slate-600 mt-2">Верхня фігура "відкушує" шматок від нижньої. (Місяць)</p>
+                </div>
+
+                <!-- Intersect -->
+                <div class="card p-6 flex flex-col items-center">
+                    <div class="bool-container mb-4">
+                        <div class="shape-circle bg-amber-400 opacity-50" style="left: 10px; top: 20px;"></div>
+                        <div class="shape-circle bg-amber-400 opacity-50" style="left: 35px; top: 20px;"></div>
+                        <div style="position: absolute; left: 35px; top: 30px; font-size: 20px; font-weight: bold; color: #b45309;">∩</div>
+                    </div>
+                    <h4 class="font-bold text-lg">Intersect (Перетин)</h4>
+                    <p class="text-sm text-center text-slate-600 mt-2">Залишається тільки спільна частина об'єктів.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Shortcuts Data -->
+        <section id="shortcuts" class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            <!-- Chart Side -->
+            <div>
+                <div class="section-header">
+                    <h3 class="text-3xl font-bold text-slate-800">4. Прискорення Роботи</h3>
+                    <p class="text-slate-500 mt-1">Розподіл команд за типом дії</p>
+                </div>
+                <p class="text-slate-600 mb-6">
+                    Професіонали рідко використовують мишку для вибору інструментів. Ось статистика типів гарячих клавіш, які вам необхідно вивчити.
+                </p>
+                <div class="card p-6">
+                    <div class="chart-container">
+                        <canvas id="shortcutsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Side -->
+            <div class="flex flex-col justify-center">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200">
+                    <table class="min-w-full divide-y divide-slate-200">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Клавіша</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Функція</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Тип</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-slate-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 bg-slate-100 rounded border border-slate-300 font-mono text-sm">Ctrl + Z</span></td>
+                                <td class="px-6 py-4 text-sm text-slate-700">Відмінити дію</td>
+                                <td class="px-6 py-4"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Контроль</span></td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 bg-slate-100 rounded border border-slate-300 font-mono text-sm">Ctrl + G</span></td>
+                                <td class="px-6 py-4 text-sm text-slate-700">Згрупувати</td>
+                                <td class="px-6 py-4"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Організація</span></td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 bg-slate-100 rounded border border-slate-300 font-mono text-sm">Ctrl + U</span></td>
+                                <td class="px-6 py-4 text-sm text-slate-700">Розгрупувати</td>
+                                <td class="px-6 py-4"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Організація</span></td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 bg-slate-100 rounded border border-slate-300 font-mono text-sm">Space</span></td>
+                                <td class="px-6 py-4 text-sm text-slate-700">Панорама (Рух)</td>
+                                <td class="px-6 py-4"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">Навігація</span></td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 bg-slate-100 rounded border border-slate-300 font-mono text-sm">[ / ]</span></td>
+                                <td class="px-6 py-4 text-sm text-slate-700">Рівень шару</td>
+                                <td class="px-6 py-4"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Організація</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer / Tips -->
+        <footer class="bg-slate-800 rounded-3xl p-8 text-white mt-12 relative overflow-hidden">
+            <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-indigo-500 rounded-full opacity-20 blur-3xl"></div>
+            <div class="relative z-10">
+                <h3 class="text-2xl font-bold mb-4">💡 Порада вчителя</h3>
+                <p class="text-lg text-slate-300 mb-6">
+                    "Не бійтеся експериментувати з <span class="text-white font-bold">Вузлами (Nodes)</span>. Кожне коло можна перетворити на хмаринку або серце, просто потягнувши за точки в режимі Edit Tool."
+                </p>
+                <div class="bg-white/10 p-4 rounded-lg inline-block">
+                    <h4 class="font-bold text-indigo-300 text-sm uppercase tracking-wide mb-1">Завдання:</h4>
+                    <p class="text-sm">Намалювати іконку улюбленого додатка, використовуючи лише геометричні фігури!</p>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        // ---------------------------------------------------------
+        // Utility Function: Label Wrapping (Mandatory Requirement)
+        // ---------------------------------------------------------
+        function wrapLabel(str, maxChars) {
+            if (str.length <= maxChars) return str;
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + " " + words[i]).length <= maxChars) {
+                    currentLine += " " + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // ---------------------------------------------------------
+        // Shared Tooltip Configuration (Mandatory Requirement)
+        // ---------------------------------------------------------
+        const sharedTooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // ---------------------------------------------------------
+        // Chart 1: Tools Analysis (Radar Chart)
+        // ---------------------------------------------------------
+        const ctxTools = document.getElementById('toolsRadarChart').getContext('2d');
+        
+        // Data derived from qualitative analysis of "The Big Four"
+        // Attributes: Frequency (How often used), Complexity (Difficulty), Precision (Fine control)
+        const rawLabelsTools = ['Transform (V)', 'Shape Tools', 'Path Tool (P)', 'Edit Tool (E)'];
+        const processedLabelsTools = rawLabelsTools.map(l => wrapLabel(l, 16));
+
+        new Chart(ctxTools, {
+            type: 'radar',
+            data: {
+                labels: processedLabelsTools,
+                datasets: [{
+                    label: 'Частота',
+                    data: [10, 8, 6, 9], // High usage for V and E
+                    fill: true,
+                    backgroundColor: 'rgba(99, 102, 241, 0.2)', // Indigo
+                    borderColor: 'rgb(99, 102, 241)',
+                    pointBackgroundColor: 'rgb(99, 102, 241)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(99, 102, 241)'
+                }, {
+                    label: 'Складність',
+                    data: [2, 3, 10, 8], // Path tool is hardest
+                    fill: true,
+                    backgroundColor: 'rgba(236, 72, 153, 0.2)', // Pink
+                    borderColor: 'rgb(236, 72, 153)',
+                    pointBackgroundColor: 'rgb(236, 72, 153)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(236, 72, 153)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                elements: {
+                    line: { borderWidth: 3 }
+                },
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(255, 255, 255, 0.2)' },
+                        grid: { color: 'rgba(255, 255, 255, 0.2)' },
+                        pointLabels: {
+                            color: 'white',
+                            font: { size: 12, family: 'Inter' }
+                        },
+                        ticks: { display: false, backdropColor: 'transparent' } // Hide numbers
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: { color: 'white', font: { family: 'Inter' } }
+                    },
+                    tooltip: sharedTooltipConfig
+                }
+            }
+        });
+
+        // ---------------------------------------------------------
+        // Chart 2: Shortcuts Categories (Doughnut Chart)
+        // ---------------------------------------------------------
+        const ctxShortcuts = document.getElementById('shortcutsChart').getContext('2d');
+
+        // Data: 1 Control (Undo), 3 Org (Group/Ungroup/Layer), 1 Nav (Space)
+        const rawLabelsShortcuts = ['Контроль (Undo)', 'Організація (Group/Layers)', 'Навігація (Space)'];
+        const processedLabelsShortcuts = rawLabelsShortcuts.map(l => wrapLabel(l, 16));
+
+        new Chart(ctxShortcuts, {
+            type: 'doughnut',
+            data: {
+                labels: processedLabelsShortcuts,
+                datasets: [{
+                    label: 'Кількість команд',
+                    data: [1, 3, 1],
+                    backgroundColor: [
+                        '#22c55e', // Green (Control)
+                        '#3b82f6', // Blue (Org)
+                        '#a855f7'  // Purple (Nav)
+                    ],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: { family: 'Inter' },
+                            padding: 20
+                        }
+                    },
+                    tooltip: sharedTooltipConfig
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
